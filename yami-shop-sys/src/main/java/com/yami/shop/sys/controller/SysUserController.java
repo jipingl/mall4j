@@ -1,13 +1,3 @@
-/*
- * Copyright (c) 2018-2999 广州市蓝海创新科技有限公司 All rights reserved.
- *
- * https://www.mall4j.com/
- *
- * 未经允许，不可做商业用途！
- *
- * 版权所有，侵权必究！
- */
-
 package com.yami.shop.sys.controller;
 
 
@@ -84,20 +74,15 @@ public class SysUserController {
 	@Operation(summary = "修改密码" , description = "修改当前登陆用户的密码")
 	public ServerResponseEntity<String> password(@RequestBody @Valid UpdatePasswordDto param){
 		Long userId = SecurityUtils.getSysUser().getUserId();
-
-        // 开源版代码，禁止用户修改admin 的账号密码
-        // 正式使用时，删除此部分代码即可
-        if (Objects.equals(1L,userId) && StrUtil.isNotBlank(param.getNewPassword())) {
-            throw new YamiShopBindException("禁止修改admin的账号密码");
-        }
+		// 验证原密码是否匹配
 		SysUser dbUser = sysUserService.getSysUserById(userId);
 		String password = passwordManager.decryptPassword(param.getPassword());
 		if (!passwordEncoder.matches(password, dbUser.getPassword())) {
 			return ServerResponseEntity.showFailMsg("原密码不正确");
 		}
-		//新密码
+		// 新密码
 		String newPassword = passwordEncoder.encode(passwordManager.decryptPassword(param.getNewPassword()));
-//		更新密码
+		// 更新密码
 		sysUserService.updatePasswordByUserId(userId, newPassword);
 		tokenStore.deleteAllToken(String.valueOf(SysTypeEnum.ADMIN.value()),String.valueOf(userId));
 		return ServerResponseEntity.success();
