@@ -64,8 +64,8 @@ services:
 
   mall4v:
     build:
-      context: ./
-      dockerfile: ./front-end/mall4v/Dockerfile
+      context: ./front-end/mall4v/
+      dockerfile: ./Dockerfile
     restart: always
     container_name: mall4v
     image: mall4v
@@ -73,5 +73,3 @@ services:
       - 80:80
     depends_on:
       - mall4j-admin
-    links:
-      - "mall4j-admin"
