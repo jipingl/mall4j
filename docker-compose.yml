@@ -61,3 +61,17 @@ services:
     links:
       - "mall4j-redis"
       - "mall4j-mysql"
+
+  mall4v:
+    build:
+      context: ./
+      dockerfile: ./front-end/mall4v/Dockerfile
+    restart: always
+    container_name: mall4v
+    image: mall4v
+    ports:
+      - 80:80
+    depends_on:
+      - mall4j-admin
+    links:
+      - "mall4j-admin"
