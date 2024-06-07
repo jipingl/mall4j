@@ -80,4 +80,5 @@ services:
       - mall4j-admin
       - mall4j-api
     links:
+      - "mall4j-admin"
       - "mall4j-api"
