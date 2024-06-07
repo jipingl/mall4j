@@ -17,7 +17,7 @@ spring:
     redis:
       host: mall.xifeng-learn.online
       port: 6379
-      database: 0
+      database: 1
 logging:
   config: classpath:logback/logback-dev.xml
 xxl-job:

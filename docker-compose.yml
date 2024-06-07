@@ -35,6 +35,8 @@ services:
     image: mall4j-admin
     ports:
       - 8085:8085
+    volumes:
+      - ./mall4j-images:/opt/mall4j/img
     depends_on:
       - mall4j-redis
       - mall4j-mysql
@@ -71,5 +73,7 @@ services:
     image: mall4v
     ports:
       - 80:80
+    volumes:
+      - ./mall4j-images:/opt/mall4j/img
     depends_on:
       - mall4j-admin
