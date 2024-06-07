@@ -73,6 +73,7 @@ services:
     image: mall4v
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./mall4j-images:/opt/mall4j/img
     depends_on:
