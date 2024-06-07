@@ -78,3 +78,5 @@ services:
       - ./mall4j-images:/opt/mall4j/img
     depends_on:
       - mall4j-admin
+    links:
+      - "mall4j-api"
